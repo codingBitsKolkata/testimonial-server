@@ -1,8 +1,8 @@
 package com.orastays.testimonial.testimonialserver.helper;
 
-public final class AuthConstant {
+public final class TestimonialConstant {
 
-	private AuthConstant() {}
+	private TestimonialConstant() {}
 
 	public static final String COMMON_SUCCESS_CODE = "common.success.code";
 	public static final String COMMON_SUCCESS_MESSAGE = "common.success.message";

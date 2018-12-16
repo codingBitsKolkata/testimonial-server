@@ -3,6 +3,8 @@ package com.orastays.testimonial.testimonialserver.helper;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -1208,6 +1210,13 @@ public class Util {
 	public static int generateOTP() {
 		
 		return (int)(Math.random() *  9000) + 1000;
+	}
+	
+	public static String errorToString(Exception e) {
+		
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors));
+		return errors.toString();
 	}
 
 	public static void main(String[] args) {
