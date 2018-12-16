@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.orastays.testimonial.testimonialserver.entity.TestimonialEntity;
 import com.orastays.testimonial.testimonialserver.exceptions.FormExceptions;
+import com.orastays.testimonial.testimonialserver.helper.Status;
 import com.orastays.testimonial.testimonialserver.model.TestimonialModel;
 import com.orastays.testimonial.testimonialserver.service.TestimonialService;
 
@@ -30,7 +31,7 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 			logger.info("addTestimonial -- START");
 		}
 		
-		testimonialValidation.validateAddReview(testimonialModel);
+		testimonialValidation.validateAddTestimonial(testimonialModel);
 		TestimonialEntity testimonialEntity = testimonialConverter.modelToEntity(testimonialModel);
 		testimonialDAO.save(testimonialEntity);		
 				
@@ -49,9 +50,7 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 		List<TestimonialModel> testimonialModels = null;
 		try {
 			Map<String, String> innerMap1 = new LinkedHashMap<>();
-			innerMap1.put("testimonialId", testimonialModel.getTestimonialId());
-			innerMap1.put("title", testimonialModel.getTitle());
-			innerMap1.put("description", testimonialModel.getDescription());
+			innerMap1.put("status", String.valueOf(Status.ACTIVE.ordinal()));
 	
 			Map<String, Map<String, String>> outerMap1 = new LinkedHashMap<>();
 			outerMap1.put("eq", innerMap1);
@@ -71,5 +70,4 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 		
 		return testimonialModels;
 	}
-
 }

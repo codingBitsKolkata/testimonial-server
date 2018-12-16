@@ -9,6 +9,6 @@ public interface QuickLinksService {
 
 	void addQuickLinks(QuickLinksModel quickLinksModel) throws FormExceptions;
 
-	List<QuickLinksModel> fetchQuickLinks(QuickLinksModel quickLinksModel) throws FormExceptions;
+	List<QuickLinksModel> fetchQuickLinks();
 
 }

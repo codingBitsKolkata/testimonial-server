@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.orastays.testimonial.testimonialserver.entity.TestimonialEntity;
+import com.orastays.testimonial.testimonialserver.helper.Status;
 import com.orastays.testimonial.testimonialserver.helper.Util;
 import com.orastays.testimonial.testimonialserver.model.TestimonialModel;
 
@@ -21,7 +22,22 @@ public class TestimonialConverter extends CommonConverter
 
 	@Override
 	public TestimonialEntity modelToEntity(TestimonialModel m) {
-		return null;
+		
+		if (logger.isInfoEnabled()) {
+			logger.info("modelToEntity -- START");
+		}
+		
+		TestimonialEntity testimonialEntity = new TestimonialEntity();
+		testimonialEntity = (TestimonialEntity) Util.transform(modelMapper, m, testimonialEntity);
+		testimonialEntity.setStatus(Status.ACTIVE.ordinal());
+		testimonialEntity.setCreatedBy(Long.parseLong(m.getUserId()));
+		testimonialEntity.setCreatedDate(Util.getCurrentDateTime());
+		
+		if (logger.isInfoEnabled()) {
+			logger.info("modelToEntity -- END");
+		}
+		
+		return testimonialEntity;
 	}
 
 	@Override

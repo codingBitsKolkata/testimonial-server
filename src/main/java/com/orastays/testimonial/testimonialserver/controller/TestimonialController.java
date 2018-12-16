@@ -42,16 +42,8 @@ private static final Logger logger = LogManager.getLogger(TestimonialController.
 			@ApiResponse(code = 205, message = "Invalid Language ID"),
 			@ApiResponse(code = 320, message = "Session expires!!! Please Login to continue..."),
 			@ApiResponse(code = 321, message = "Please give User Token"),
-			@ApiResponse(code = 1100, message = "Please give property Id"),
-			@ApiResponse(code = 1101, message = "Invalid Property"),
-			@ApiResponse(code = 1102, message = "Please give Booking Id"),
-			@ApiResponse(code = 1103, message = "Booking Id invalid"),
-			@ApiResponse(code = 1104, message = "Please write some comment"),
-			@ApiResponse(code = 1105, message = "Please give rating"),
-			@ApiResponse(code = 1106, message = "Invalid rating"),
-			@ApiResponse(code = 1107, message = "Please give rating Id"),
-			@ApiResponse(code = 1108, message = "Rating is not active"),
-			@ApiResponse(code = 1109, message = "You have already Testimonialed this property")})
+			@ApiResponse(code = 303, message = "Title cannot be empty"),
+			@ApiResponse(code = 406, message = "Description cannot be empty") })
 	public ResponseEntity<ResponseModel> addTestimonial(@RequestBody TestimonialModel testimonialModel) {
 	
 		if (logger.isInfoEnabled()) {
@@ -96,7 +88,7 @@ private static final Logger logger = LogManager.getLogger(TestimonialController.
 		}
 	}
 	
-	@PostMapping(value = "/fetch-Testimonial", produces = "application/json")
+	@PostMapping(value = "/fetch-testimonials", produces = "application/json")
 	@ApiOperation(value = "Fetch Testimonial", response = ResponseModel.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 201, message = "Please Try after Sometime!!!") })
