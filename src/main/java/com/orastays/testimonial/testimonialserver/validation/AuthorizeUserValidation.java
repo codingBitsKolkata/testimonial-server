@@ -69,7 +69,8 @@ public class AuthorizeUserValidation {
 			if(StringUtils.isBlank(userToken)) {
 				exceptions.put(messageUtil.getBundle("user.token.null.code"), new Exception(messageUtil.getBundle("user.token.null.message")));
 			} else {
-				ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-token?userToken="+userToken, ResponseModel.class);
+				//ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-token?userToken="+userToken, ResponseModel.class);
+				ResponseModel responseModel = restTemplate.getForObject(messageUtil.getBundle("auth.server.url") +"check-token?userToken="+userToken, ResponseModel.class);
 				Gson gson = new Gson();
 				String jsonString = gson.toJson(responseModel.getResponseBody());
 				userModel = gson.fromJson(jsonString, UserModel.class);
