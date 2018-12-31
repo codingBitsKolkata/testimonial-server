@@ -22,12 +22,12 @@ public class UserModel extends CommonModel {
 	@JsonProperty("userId")
 	private String userId;
 	
-	@JsonProperty("name")
-	private String name;
-	
 	@JsonProperty("mobileNumber")
 	private String mobileNumber;
 	
 	@JsonProperty("emailId")
 	private String emailId;
+	
+	@JsonProperty("userVsInfo")
+	private UserVsInfoModel userVsInfoModel;
 }

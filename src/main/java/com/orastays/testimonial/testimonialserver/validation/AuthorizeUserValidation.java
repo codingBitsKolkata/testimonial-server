@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
@@ -69,12 +70,16 @@ public class AuthorizeUserValidation {
 			if(StringUtils.isBlank(userToken)) {
 				exceptions.put(messageUtil.getBundle("user.token.null.code"), new Exception(messageUtil.getBundle("user.token.null.message")));
 			} else {
-				//ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-token?userToken="+userToken, ResponseModel.class);
-				ResponseModel responseModel = restTemplate.getForObject(messageUtil.getBundle("auth.server.url") +"check-token?userToken="+userToken, ResponseModel.class);
-				Gson gson = new Gson();
-				String jsonString = gson.toJson(responseModel.getResponseBody());
-				userModel = gson.fromJson(jsonString, UserModel.class);
-				if(Objects.isNull(userModel)) {
+				try{
+					//ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-token?userToken="+userToken, ResponseModel.class);
+					ResponseModel responseModel = restTemplate.getForObject(messageUtil.getBundle("auth.server.url") +"check-token?userToken="+userToken, ResponseModel.class);
+					Gson gson = new Gson();
+					String jsonString = gson.toJson(responseModel.getResponseBody());
+					userModel = gson.fromJson(jsonString, UserModel.class);
+					if(Objects.isNull(userModel)) {
+						exceptions.put(messageUtil.getBundle("session.expires.code"), new Exception(messageUtil.getBundle("session.expires.message")));
+					}
+				}catch(HttpClientErrorException e) {
 					exceptions.put(messageUtil.getBundle("session.expires.code"), new Exception(messageUtil.getBundle("session.expires.message")));
 				}
 				
@@ -112,11 +117,16 @@ public class AuthorizeUserValidation {
 			if(StringUtils.isBlank(languageId)) {
 				exceptions.put(messageUtil.getBundle("language.id.null.code"), new Exception(messageUtil.getBundle("language.id.null.message")));
 			} else {
-				ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-language?languageId="+languageId, ResponseModel.class);
+				try{
+				//ResponseModel responseModel = restTemplate.getForObject("http://localhost:7080/api/check-language?languageId="+languageId, ResponseModel.class);
+				ResponseModel responseModel = restTemplate.getForObject(messageUtil.getBundle("auth.server.url") +"check-language?languageId="+languageId, ResponseModel.class);
 				Gson gson = new Gson();
 				String jsonString = gson.toJson(responseModel.getResponseBody());
 				commonModel = gson.fromJson(jsonString, CommonModel.class);
 				if(Objects.isNull(commonModel)) {
+					exceptions.put(messageUtil.getBundle("language.id.invalid.code"), new Exception(messageUtil.getBundle("language.id.invalid.message")));
+				}
+				} catch(HttpClientErrorException e) {
 					exceptions.put(messageUtil.getBundle("language.id.invalid.code"), new Exception(messageUtil.getBundle("language.id.invalid.message")));
 				}
 				
