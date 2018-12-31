@@ -1,10 +1,8 @@
 package com.orastays.testimonial.testimonialserver.service.impl;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
@@ -20,6 +17,7 @@ import com.orastays.testimonial.testimonialserver.entity.TestimonialEntity;
 import com.orastays.testimonial.testimonialserver.exceptions.FormExceptions;
 import com.orastays.testimonial.testimonialserver.helper.MessageUtil;
 import com.orastays.testimonial.testimonialserver.helper.Status;
+import com.orastays.testimonial.testimonialserver.helper.Util;
 import com.orastays.testimonial.testimonialserver.model.ResponseModel;
 import com.orastays.testimonial.testimonialserver.model.TestimonialModel;
 import com.orastays.testimonial.testimonialserver.model.UserModel;
@@ -55,7 +53,7 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 	}
 
 	@Override
-	public List<TestimonialModel> fetchTestimonial(TestimonialModel testimonialModel) throws FormExceptions {
+	public List<TestimonialModel> fetchTestimonial() throws FormExceptions {
 		
 		if (logger.isInfoEnabled()) {
 			logger.info("fetchTestimonial -- START");
@@ -72,13 +70,15 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 			Map<String, Map<String, Map<String, String>>> alliasMap = new LinkedHashMap<>();
 			alliasMap.put(entitymanagerPackagesToScan+".TestimonialEntity", outerMap1);
 			
-			testimonialModels = new ArrayList<>();
 			testimonialModels = testimonialConverter.entityListToModelList(testimonialDAO.fetchListBySubCiteria(alliasMap));
-			for (TestimonialModel testimonialModel1:testimonialModels) {
-				String userId = testimonialModel1.getUserId();
-				UserModel userModel=getUserInfo(userId);
+			for (TestimonialModel testimonialModel : testimonialModels) {
+				
+				testimonialModel.setUserModel(getUserInfo(testimonialModel.getUserId()));
 			}
 		} catch (Exception e) {
+			if (logger.isInfoEnabled()) {
+				logger.info("Exception in fetchTestimonial -- "+Util.errorToString(e));
+			}
 		}
 		
 		if (logger.isInfoEnabled()) {
@@ -102,12 +102,10 @@ public class TestimonialServiceImpl extends BaseServiceImpl implements Testimoni
 			String jsonString = gson.toJson(responseModel.getResponseBody());
 			userModel = gson.fromJson(jsonString, UserModel.class);
 			
-			if(Objects.isNull(userModel)) {
-				exceptions.put(messageUtil.getBundle("session.expires.code"), new Exception(messageUtil.getBundle("session.expires.message")));
-			}
-		}catch(HttpClientErrorException e) {
+		} catch(Exception e) {
 			exceptions.put(messageUtil.getBundle("session.expires.code"), new Exception(messageUtil.getBundle("session.expires.message")));
 		}
+		
 		return userModel;
 	}
 }

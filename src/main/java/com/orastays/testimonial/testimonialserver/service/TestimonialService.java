@@ -6,8 +6,9 @@ import com.orastays.testimonial.testimonialserver.exceptions.FormExceptions;
 import com.orastays.testimonial.testimonialserver.model.TestimonialModel;
 
 public interface TestimonialService {
+	
 	void addTestimonial(TestimonialModel testimonialModel) throws FormExceptions;
 
-	List<TestimonialModel> fetchTestimonial(TestimonialModel testimonialModel) throws FormExceptions;
+	List<TestimonialModel> fetchTestimonial() throws FormExceptions;
 
 }

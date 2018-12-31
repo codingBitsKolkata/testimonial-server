@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,20 +89,20 @@ private static final Logger logger = LogManager.getLogger(TestimonialController.
 		}
 	}
 	
-	@PostMapping(value = "/fetch-testimonials", produces = "application/json")
+	@GetMapping(value = "/fetch-testimonials", produces = "application/json")
 	@ApiOperation(value = "Fetch Testimonial", response = ResponseModel.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 201, message = "Please Try after Sometime!!!") })
-	public ResponseEntity<ResponseModel> fetchTestimonial(@RequestBody TestimonialModel testimonialModel) {
+	public ResponseEntity<ResponseModel> fetchTestimonial() {
 	
 		if (logger.isInfoEnabled()) {
 			logger.info("fetchTestimonial -- START");
 		}
 
 		ResponseModel responseModel = new ResponseModel();
-		Util.printLog(testimonialModel, TestimonialConstant.INCOMING, "Fetch Testimonial", request);
+		Util.printLog(null, TestimonialConstant.INCOMING, "Fetch Testimonial", request);
 		try {
-			List<TestimonialModel> testimonialModels = testimonialService.fetchTestimonial(testimonialModel);
+			List<TestimonialModel> testimonialModels = testimonialService.fetchTestimonial();
 			responseModel.setResponseBody(testimonialModels);
 			responseModel.setResponseCode(messageUtil.getBundle(TestimonialConstant.COMMON_SUCCESS_CODE));
 			responseModel.setResponseMessage(messageUtil.getBundle(TestimonialConstant.COMMON_SUCCESS_MESSAGE));

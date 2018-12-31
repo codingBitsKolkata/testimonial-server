@@ -33,5 +33,8 @@ public class TestimonialModel extends CommonModel {
 	
 	@JsonProperty("parentId")
 	private String parentId;
+	
+	@JsonProperty("user")
+	private UserModel userModel;
 
 }

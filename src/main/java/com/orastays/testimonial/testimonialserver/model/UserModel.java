@@ -29,5 +29,5 @@ public class UserModel extends CommonModel {
 	private String emailId;
 	
 	@JsonProperty("userVsInfo")
-	private UserVsInfoModel userVsInfoModel;
+	private UserVsInfoModel userVsInfo;
 }
