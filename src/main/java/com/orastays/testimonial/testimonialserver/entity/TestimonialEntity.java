@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,21 +25,27 @@ public class TestimonialEntity extends CommonEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "testimonial_id")
+	@JsonProperty("testimonialId")
 	private Long testimonialId;
 
 	@Column(name = "title")
+	@JsonProperty("title")
 	private String title;
 
 	@Column(name = "description")
+	@JsonProperty("description")
 	private String description;
 
 	@Column(name = "user_id")
+	@JsonProperty("userId")
 	private Long userId;
 
 	@Column(name = "language_id")
+	@JsonProperty("languageId")
 	private Long languageId;
 
 	@Column(name = "parent_id")
+	@JsonProperty("parentId")
 	private Long parentId;
 
 	@Override
