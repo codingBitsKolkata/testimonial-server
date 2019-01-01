@@ -41,8 +41,8 @@ private static final Logger logger = LogManager.getLogger(TestimonialController.
 			@ApiResponse(code = 321, message = "Please give User Token"),
 			@ApiResponse(code = 323, message = "Language Id Required"),
 			@ApiResponse(code = 324, message = "Invalid Language Id"),
-			@ApiResponse(code = 1300, message = "Please provide testimonial title"),
-			@ApiResponse(code = 1301, message = "Please provide testimonial description") })
+			@ApiResponse(code = 1600, message = "Please provide testimonial title"),
+			@ApiResponse(code = 1601, message = "Please provide testimonial description") })
 	public ResponseEntity<ResponseModel> addTestimonial(@RequestBody TestimonialModel testimonialModel) {
 	
 		if (logger.isInfoEnabled()) {

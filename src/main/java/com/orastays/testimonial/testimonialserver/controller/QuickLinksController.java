@@ -37,8 +37,8 @@ private static final Logger logger = LogManager.getLogger(QuickLinksController.c
 	@ApiOperation(value = "Add QuickLinks", response = ResponseModel.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 201, message = "Please Try after Sometime!!!"),
-			@ApiResponse(code = 1302, message = "Please provide quicklinks title!!"),
-			@ApiResponse(code = 1303, message = "Please provide quicklinks url!!") })
+			@ApiResponse(code = 1602, message = "Please provide quicklinks title!!"),
+			@ApiResponse(code = 1603, message = "Please provide quicklinks url!!") })
 	public ResponseEntity<ResponseModel> addQuickLinks(@RequestBody QuickLinksModel quickLinksModel) {
 	
 		if (logger.isInfoEnabled()) {
