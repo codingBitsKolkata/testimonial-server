@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,7 +89,7 @@ private static final Logger logger = LogManager.getLogger(QuickLinksController.c
 		}
 	}
 	
-	@PostMapping(value = "/fetch-quickLinks", produces = "application/json")
+	@GetMapping(value = "/fetch-quickLinks", produces = "application/json")
 	@ApiOperation(value = "Fetch QuickLinks", response = ResponseModel.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 201, message = "Please Try after Sometime!!!") })
