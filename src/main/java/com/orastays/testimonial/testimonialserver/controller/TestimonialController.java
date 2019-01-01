@@ -37,14 +37,12 @@ private static final Logger logger = LogManager.getLogger(TestimonialController.
 	@ApiOperation(value = "Add Testimonial", response = com.orastays.testimonial.testimonialserver.model.ResponseModel.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 201, message = "Please Try after Sometime!!!"),
-			@ApiResponse(code = 202, message = "Token Required"),
-			@ApiResponse(code = 203, message = "Token Expires!!!Please login to continue..."),
-			@ApiResponse(code = 204, message = "Language Id Required"),
-			@ApiResponse(code = 205, message = "Invalid Language ID"),
 			@ApiResponse(code = 320, message = "Session expires!!! Please Login to continue..."),
 			@ApiResponse(code = 321, message = "Please give User Token"),
-			@ApiResponse(code = 303, message = "Title cannot be empty"),
-			@ApiResponse(code = 406, message = "Description cannot be empty") })
+			@ApiResponse(code = 323, message = "Language Id Required"),
+			@ApiResponse(code = 324, message = "Invalid Language Id"),
+			@ApiResponse(code = 1300, message = "Please provide testimonial title"),
+			@ApiResponse(code = 1301, message = "Please provide testimonial description") })
 	public ResponseEntity<ResponseModel> addTestimonial(@RequestBody TestimonialModel testimonialModel) {
 	
 		if (logger.isInfoEnabled()) {

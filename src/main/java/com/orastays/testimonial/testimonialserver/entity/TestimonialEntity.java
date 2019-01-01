@@ -32,7 +32,7 @@ public class TestimonialEntity extends CommonEntity {
 	@JsonProperty("title")
 	private String title;
 
-	@Column(name = "description")
+	@Column(name = "description", length = 65535,columnDefinition="Text" )
 	@JsonProperty("description")
 	private String description;
 
