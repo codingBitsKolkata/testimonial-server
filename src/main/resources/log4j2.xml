@@ -15,8 +15,8 @@
 
 		<!-- Rolling File Appender -->
 		<RollingFile name="FileAppender"
-			fileName="logs/testimonial_server.log"
-			filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+			fileName="logs/testimonial server/testimonial_server.log"
+			filePattern="logs/testimonial server/%d{yyyy-MM-dd}/testimonial_server-%i.log">
 			<PatternLayout>
 				<Pattern>${LOG_PATTERN}</Pattern>
 			</PatternLayout>
