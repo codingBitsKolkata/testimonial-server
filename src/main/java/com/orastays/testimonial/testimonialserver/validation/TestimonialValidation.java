@@ -21,8 +21,8 @@ public class TestimonialValidation extends AuthorizeUserValidation {
 	// Validation while adding review
 	public TestimonialModel validateAddTestimonial(TestimonialModel testimonialModel) throws FormExceptions {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateAddTestimonial -- Start");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateAddTestimonial -- Start");
 		}
 
 		Map<String, Exception> exceptions = new LinkedHashMap<>();
@@ -48,8 +48,8 @@ public class TestimonialValidation extends AuthorizeUserValidation {
 				throw new FormExceptions(exceptions);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateAddTestimonial -- End");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateAddTestimonial -- End");
 		}
 		return testimonialModel;
 	}

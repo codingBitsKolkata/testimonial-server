@@ -20,8 +20,8 @@ public class QuickLinksValidation extends AuthorizeUserValidation {
 	// Validation while adding QuickLinks
 	public QuickLinksModel validateAddQuickLinks(QuickLinksModel quickLinksModel) throws FormExceptions {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateAddQuickLinks -- Start");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateAddQuickLinks -- Start");
 		}
 
 		Map<String, Exception> exceptions = new LinkedHashMap<>();
@@ -40,8 +40,8 @@ public class QuickLinksValidation extends AuthorizeUserValidation {
 				throw new FormExceptions(exceptions);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateAddQuickLinks -- End");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateAddQuickLinks -- End");
 		}
 		
 		return quickLinksModel;
