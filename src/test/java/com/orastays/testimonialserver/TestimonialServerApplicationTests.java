@@ -1,4 +1,4 @@
-package com.orastays.testimonial.testimonialserver;
+package com.orastays.testimonialserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
