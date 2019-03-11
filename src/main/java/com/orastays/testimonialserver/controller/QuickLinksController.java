@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+//@RequestMapping("/api")
 @Api(value = "QuickLinks", tags = "QuickLinks")
 public class QuickLinksController extends BaseController {
 	
